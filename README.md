@@ -1,4 +1,4 @@
-# Metabase Dashboard pour Stanford Ranking 2025
+# Tableau de bord Metabase pour le classement Stanford
 
 Ce projet vous permet de visualiser les données du fichier `stanford_ranking_2025.csv` dans un tableau de bord Metabase. Aucune base de données existante n'est requise : nous utiliserons SQLite pour stocker les données.
 
