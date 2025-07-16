@@ -3,6 +3,8 @@
 Ce projet vous permet de visualiser les données du fichier `stanford_ranking_2025.csv` dans un tableau de bord Metabase. Aucune base de données existante n'est requise : nous utiliserons SQLite pour stocker les données.
 
 
+Pour installer Docker, vous pouvez suivre les ([instructions](https://docs.docker.com/get-docker/)) de l'entreprise Docker (en anglais). Vous pouvez aussi suivre le guide suivant.
+
 ### Installation de Docker sous Windows
 
 Pour installer Docker sous Windows, commencez par vérifier que votre système répond aux exigences : Windows 10 (version 2004 ou ultérieure) ou Windows 11, avec la fonctionnalité Hyper-V activée pour les éditions Pro, Enterprise ou Education. Rendez-vous sur le site officiel de Docker (docker.com) et téléchargez **Docker Desktop** pour Windows. Exécutez le programme d’installation, qui vous guidera à travers un processus simple. Assurez-vous que l’option "Enable WSL 2" est sélectionnée si vous utilisez Windows Subsystem for Linux (WSL 2), car cela améliore les performances. Une fois l’installation terminée, redémarrez votre ordinateur si nécessaire. Lancez Docker Desktop, qui s’exécutera en arrière-plan, et vérifiez son bon fonctionnement en ouvrant un terminal (PowerShell ou Invite de commandes) et en tapant `docker --version`. Si la commande renvoie une version, Docker est prêt à être utilisé.
