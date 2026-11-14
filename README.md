@@ -52,22 +52,36 @@ docker run -d -p 3000:3000 \
 **ATTENTION**: assurez-vous de démarrer dans le répertoire principal du projet.
 Si vous ne faites pas cela, le dossier `data` sera introuvable.
 
+La commande ci-dessus fonctionne sous macOS, Linux et dans un terminal WSL. Sous Windows, la variable `$PWD` et le caractère `\` en fin de ligne ne fonctionnent pas dans l'invite de commandes (cmd). Tapez plutôt la commande sur une seule ligne :
+
+- dans PowerShell :
+
+```powershell
+docker run -d -p 3000:3000 -v "${PWD}/data:/data" --name metabase metabase/metabase
+```
+
+- dans l'invite de commandes (cmd) :
+
+```bat
+docker run -d -p 3000:3000 -v "%cd%\data:/data" --name metabase metabase/metabase
+```
+
 3. **Configurer Metabase**
 - Accédez à [http://localhost:3000](http://localhost:3000)
-- Ajoutez une base de données SQLite : `data/stanford_ranking_2025.db` avec comme nom `stanford_ranking_2025.db`
+- Ajoutez une base de données SQLite : `/data/stanford_ranking_2025.db` avec comme nom `stanford_ranking_2025.db` (dans le conteneur, le dossier `data` du projet est monté sous `/data`)
 - Créez un tableau de bord en important la table générée
 
 
-## Activitée suggérée
+## Activité suggérée
 
 - Ouvrez Metabase et sélectionnez votre base SQLite (stanford_ranking_2025.db).
 - Dans le menu principal, cliquez sur “Questions” puis “Nouvelle question”.
 - Choisissez la table stanford_ranking_2025.
 - Filtrez les lignes où la colonne cntry est égale à `can`. Cliquez sur “Filtrer”, sélectionnez cntry, puis “est égal à” et entrez can.
 - Filtrez les lignes où la colonne `Inst Name` contient `Université`. Cliquez sur “Filtrer” (`+`), sélectionnez `Inst Name`, puis “Contient” et entrez `Université`.
-- Sous résumer, nombre de liens, puis Inst Name.
-- Cliquez sur 'Visualiser`.
-- Vous deviez alor voir un tableau. Cliquez sur visualiser, puis Histogramme. Vous devriez voir la liste des institutions par nombre de chercheur.
+- Sous résumer, nombre de lignes, puis Inst Name.
+- Cliquez sur “Visualiser”.
+- Vous devriez alors voir un tableau. Cliquez sur visualiser, puis Histogramme. Vous devriez voir la liste des institutions par nombre de chercheurs.
 
 Si vous enregistrez cette visualisation, vous devriez être capable de l'ajouter à un tableau de bord.
 
@@ -89,7 +103,7 @@ docker rm metabase
 Le script `python/create.py` lit le CSV et crée la base SQLite `data/stanford_ranking_2025.db`.
 Vous n'avez pas besoin de ce script.
 
-Le script `python/extract.py` va créer le CSV à partir du fichier Excel original.
+Le script `python/extract.py` extrait les colonnes utiles du fichier Excel original et les enregistre dans le fichier `extracted_columns.csv` (dans le répertoire courant) ; le fichier `data/stanford_ranking_2025.csv` a été obtenu de cette manière.
 Vous n'avez pas besoin de ce script.
 
 ## Pourquoi Metabase peut lire la base SQLite ?
@@ -101,4 +115,4 @@ Metabase inclut nativement le support de SQLite. Vous n'avez pas besoin d'instal
 - `cntry` : Pays
 - `firstyr` : Première année
 - `lastyr` : Dernière année
-- `rank (ns)` : Rang
+- `rank_ns` : Rang (colonne `rank (ns)` du fichier CSV)
