@@ -1,6 +1,4 @@
 import pandas as pd
-import sqlite3
-import os
 
 def extract_columns_from_excel(file_path, sheet_name='Data'):
     try:
@@ -44,27 +42,14 @@ def extract_columns_from_excel(file_path, sheet_name='Data'):
         print(f"Une erreur s'est produite : {str(e)}")
         return None
 
-# Exemple d'utilisation
-file_path = 'Table_1_Authors_career_2023_pubs_since_1788_wopp_extracted_202408.xlsx'  # Remplacer par le chemin de votre fichier Excel
-extracted_data = extract_columns_from_excel(file_path)
-
-# Afficher un aperçu des données extraites (si elles existent)
-if extracted_data is not None:
-    print("\nAperçu des données extraites :")
-    print(extracted_data.head())
-
-# Chemins
-csv_path = os.path.join(os.path.dirname(__file__), '../data/stanford_ranking_2025.csv')
-db_path = os.path.join(os.path.dirname(__file__), '../data/stanford_ranking_2025.db')
-
-def main():
-    # Lire le CSV
-    df = pd.read_csv(csv_path)
-    # Enregistrer dans SQLite
-    conn = sqlite3.connect(db_path)
-    df.to_sql('stanford_ranking_2025', conn, if_exists='replace', index=False)
-    conn.close()
-    print(f"Base de données créée : {db_path}")
-
 if __name__ == "__main__":
-    main()
+    # Exemple d'utilisation
+    file_path = 'Table_1_Authors_career_2023_pubs_since_1788_wopp_extracted_202408.xlsx'  # Remplacer par le chemin de votre fichier Excel
+    extracted_data = extract_columns_from_excel(file_path)
+
+    # Afficher un aperçu des données extraites (si elles existent)
+    if extracted_data is not None:
+        print("\nAperçu des données extraites :")
+        print(extracted_data.head())
+
+    # Pour créer la base SQLite (colonne rank_ns), utilisez python/create.py.
